@@ -1,8 +1,10 @@
 const ExcelJS = require("exceljs");
 const { genRandomName } = require("../utils/genRandom");
 
+// task 2 OCP
 const generateReport = async (users) => {
-  const randomName = `reports/excel/${genRandomName("excel.xlsx")}`;
+  const reportName = genRandomName("excel.xlsx")
+  const reportPath = `files/excel/${reportName}`;
  try {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet("users");
@@ -14,12 +16,12 @@ const generateReport = async (users) => {
     ];
   
     sheet.addRows(users);
-    await workbook.xlsx.writeFile(randomName);
-    console.log(`report created ${randomName}`);
+    await workbook.xlsx.writeFile(reportPath);
+    console.log(`report created ${reportPath}`);
  } catch (error) {
     throw new Error("Failed to generate excel report")
  }
-  return randomName;
+  return {reportPath,reportName};
 };
 
 module.exports = {

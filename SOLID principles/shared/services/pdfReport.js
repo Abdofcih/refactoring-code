@@ -1,18 +1,17 @@
-// requires
 const fs = require("fs");
 const PDFDocument = require("pdfkit-table");
 const { genRandomName } = require("../utils/genRandom");
 
+// task 2 OCP
 const generateReport = async (users) => {
-  const randomName = `reports/pdf/${genRandomName("pdf.pdf")}`;
+  const reportName = genRandomName("pdf.pdf");
+  const reportPath = `files/pdf/${reportName}`;
   try {
-    // init document
     let doc = new PDFDocument({ margin: 30, size: "A4" });
     // save document
-    doc.pipe(fs.createWriteStream(randomName));
+    doc.pipe(fs.createWriteStream(reportPath));
 
     (async function createTable() {
-      // table
       const table = {
         title: "",
         headers: [
@@ -33,7 +32,7 @@ const generateReport = async (users) => {
   } catch (error) {
     throw new Error("Failed to generate pdf report");
   }
-  return randomName;
+  return { reportPath, reportName };
 };
 
 module.exports = {

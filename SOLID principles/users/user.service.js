@@ -1,6 +1,10 @@
 const { User } = require("../db");
 const { sendSignUpEmail, sendUpdateEmail } = require("../emails/email.service");
 
+const findUsersService = async()=>{
+  const users = await User.findAll();
+  return users
+}
 const findOneUserService = async(id)=>{
   const user = await User.findByPk(id);
   return user
@@ -35,5 +39,6 @@ const updateUserService = async (id, userData) => {
 module.exports = {
   createUserService,
   updateUserService,
-  findOneUserService
+  findOneUserService,
+  findUsersService
 };

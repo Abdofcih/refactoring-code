@@ -3,3 +3,6 @@
 
 # Ignore .env files
 **/.env
+
+# Ignore genrated files like reports
+**/files/
